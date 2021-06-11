@@ -9,6 +9,14 @@ class HomePage(BasePage):
     ACCOUNT_NAME = (By.CSS_SELECTOR, "user-info")
     SETTINGS_ICON = (By.XPATH, '//*[@id="navbar-container"]/div[2]/ul/li[2]/ul/li[1]/a')
 
+    BOTAO_MENU = (By.XPATH, '//*[@id="navbar-container"]/div[2]/ul/li[2]/a/span')
+    BOTAO_MINHA_CONTA = (By.XPATH, '//*[@id="navbar-container"]/div[2]/ul/li[2]/ul/li[1]/a')
+    BOTAO_PROSSEGUIR_CADASTRO = (By.XPATH, '//*[@id="main-container"]/div[2]/div[2]/div/div/div/div[2]/div/a')
+    BOTAO_ATUALIZAR_USUARIO = (By.XPATH, '//*[@id="account-update-form"]/div[1]/div[2]/div[2]/input')
+    BOTAO_SENHA_ATUAL = (By.ID, 'password-current')
+    BOTAO_NOVA_SENHA = (By.ID, 'password')
+    BOTAO_CONFIRMAR_SENHA = (By.ID, 'password-confirm')
+
     def __init__(self, driver):
         super().__init__(driver)
 
@@ -28,3 +36,15 @@ class HomePage(BasePage):
 
     def clicar_tarefas(self):
         return MinhaVisao(self)
+
+    def reverter_senha(self):
+        self.do_click(self.BOTAO_MENU)
+        self.do_click(self.BOTAO_MINHA_CONTA)
+        self.do_click(self.BOTAO_SENHA_ATUAL)
+        self.do_send_keys(self.BOTAO_SENHA_ATUAL, "gusmantis1")
+        self.do_click(self.BOTAO_NOVA_SENHA)
+        self.do_send_keys(self.BOTAO_NOVA_SENHA, "gusmantis")
+        self.do_click(self.BOTAO_CONFIRMAR_SENHA)
+        self.do_send_keys(self.BOTAO_CONFIRMAR_SENHA, "gusmantis")
+        self.do_click(self.BOTAO_ATUALIZAR_USUARIO)
+        self.do_click(self.BOTAO_PROSSEGUIR_CADASTRO)

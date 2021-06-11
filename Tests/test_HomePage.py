@@ -5,12 +5,16 @@ from Tests.test_base import BaseTest
 
 class Test_home(BaseTest):
 
+    """
+    CLASSE EXEMPLO - NÃO SERÁ UTILIZADA NO PROJETO BDD BASE2
+    """
+
     def test_home_page_title(self):
         self.loginPage = LoginPage(self.driver)
         homePage = self.loginPage.do_login_homepage(TestData.USER_NAME, TestData.PASSWORD)
         title = homePage.get_home_page_title(TestData.HOME_PAGE_TITLE)
         assert title == TestData.HOME_PAGE_TITLE
-
+"""
     def test_home_page_header(self):
         self.loginPage = LoginPage(self.driver)
         homePage = self.loginPage.do_login_homepage(TestData.USER_NAME, TestData.PASSWORD)
@@ -27,3 +31,4 @@ class Test_home(BaseTest):
         self.loginPage = LoginPage(self.driver)
         homePage = self.loginPage.do_login_homepage(TestData.USER_NAME, TestData.PASSWORD)
         assert homePage.is_settings_icon_exist()
+        """

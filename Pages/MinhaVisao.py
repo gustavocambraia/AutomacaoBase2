@@ -1,6 +1,8 @@
 import string
 
 from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
+
 from Pages.BasePage import BasePage
 import random
 
@@ -9,7 +11,7 @@ class MinhaVisao(BasePage):
     VER_TAREFAS = (By.XPATH, '//*[@id="sidebar"]/ul/li[2]/a/span')  # Menu lateral "Ver Tarefas" no dashboard
     SELECIONAR_TAREFA = (By.XPATH, '//*[@id="buglist"]/tbody/tr[1]/td[4]/a')  # hiperlink com o n da tarefa no dashboard
     HEADER_DETALHES_TAREFA = (By.XPATH, r'/html/body/div[2]/div[2]/div[2]/div/div[1]/div/div[1]/h4/text()')
-    VER_DETALHES = (By.XPATH, '//*[@id="main-container"]/div[2]/div[2]/div/div[1]/div/div[1]/h4')
+    VER_DETALHES = (By.XPATH, '//*[@id="main-container"]/div[2]/div[2]/div/div[1]/div/div[1]/h4')  # header "Detalhes"
     BOTAO_ATUALIZAR = (By.XPATH, '//*[@id="main-container"]/div[2]/div[2]/div/div[1]/div/div[2]/'
                                  'div[2]/div/table/tfoot/tr/td/div/div[1]/form/fieldset/input[3]')
     BOTAO_ATUALIZAR_ENVIAR = (By.XPATH, '//*[@id="update_bug_form"]/div/div[3]/input')
@@ -33,23 +35,29 @@ class MinhaVisao(BasePage):
         return MinhaVisao(self.driver)
 
     def get_minhavisao_title(self, title):
+        """ Get do título da página """
         return self.get_title(title)
 
     def get_header_minhavisao(self):
+        """ Get do header da página de tarefas """
         if self.is_visible(self.HEADER_DETALHES_TAREFA):
             return self.get_element_text(self.HEADER_DETALHES_TAREFA)
 
     def ver_detalhes(self):
+        """ Verifica se a página de detalhes é visível """
         return self.is_visible(self.VER_DETALHES)
 
     def selecionar_tarefa(self):
+        """ Seleciona a primeira tarefa na tabela do dashboard """
         self.do_click(MinhaVisao.VER_TAREFAS)
         self.do_click(MinhaVisao.SELECIONAR_TAREFA)
 
     def numero_tarefa(self):
+        """ Pega o número da tarefa na página dos detalhes """
         return self.get_element_text(self.CAMPO_NUMERO_TAREFA)
 
     def confirmar_numero_tarefa(self):
+        """ Pega o número da tarefa na tabela de tarefas existentes """
         return self.get_text(self.SELECIONAR_TAREFA)
 
     def atualizar_tarefa(self):
@@ -80,22 +88,24 @@ class MinhaVisao(BasePage):
         """ Digita no campo "Tarefa #" o numero da tarefa que deseja ser pesquisada """
         self.do_click(self.CAMPO_PESQUISAR_TAREFA)
         self.do_send_keys(self.CAMPO_PESQUISAR_TAREFA, num_tarefa)
+        self.do_send_keys(self.CAMPO_PESQUISAR_TAREFA, Keys.ENTER)
 
     def pesquisar_tarefa_invalida(self):
+        """ Digita no campo "Tarefa #" letras ao invés de números """
         letras = string.ascii_letters
         texto_rand = ''.join(random.choice(letras) for i in range(5))
         self.do_click(self.CAMPO_PESQUISAR_TAREFA)
         self.do_send_keys(self.CAMPO_PESQUISAR_TAREFA, texto_rand)
 
-    def verifica_tarefa_aberta(self, num_teste):
+    def verifica_tarefa_aberta(self):
         """ Verifica se o número da tarefa selecionada pelo dashboard é o mesmo que o da tarefa aberta """
-        num_tarefa = self.get_text(self.CAMPO_NUMERO_TAREFA)
-        if num_tarefa == num_teste:
-            return True
-        else:
-            return False
+        num_tarefa = self.get_element_text(self.CAMPO_NUMERO_TAREFA)
+        return num_tarefa
 
     def verifica_erro_pesquisa(self):
+        """ Verifica se a mensagem de erro é exibida na página """
         erro = self.get_element_text(self.APPLICATION_ERROR)
         if erro == "APPLICATION ERROR #203":
             return True
+        else:
+            return False

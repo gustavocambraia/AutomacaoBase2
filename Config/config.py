@@ -14,5 +14,6 @@ class TestData:
 
     COLUNA_TOKEN = '//*[@title="Check All Q1"]'
     TITULO_TOKEN_API = "Tokens API - MantisBT"
+    MENSAGEM_ERRO_SENHA = 'APPLICATION ERROR #812'
 
 

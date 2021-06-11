@@ -1,6 +1,5 @@
 import string
 import time
-
 from selenium.webdriver.common.by import By
 from Pages.BasePage import BasePage
 import random

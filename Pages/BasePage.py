@@ -48,23 +48,7 @@ class BasePage:
         texto = WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(by_locator)).text
         return texto
 
-
-
-    """
-    def itens_coluna(self, by_locator):
-        texto = WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located
-                                                     (by_locator))
-        return texto
-    
-    
-    def coluna(self, column_number):
-
-        WebDriverWait(self.driver, 10).__getattribute__("")
-        chrome = webdriver.Chrome(executable_path=TestData.CHROME_EXECUTABLE_PATH).get("https://mantis.saojudas.base2.com.br/api_tokens_page.php")
-        col = chrome.table.find_element_by_xpath("//tr/td[" + str(column_number) + "]")
-        rdata = []
-        for webElement in col:
-            rdata.append(webElement.text)
-        return rdata
-    """
-
+    def get_value(self, by_locator):
+        attribute = WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(by_locator)).\
+            get_attribute("value")
+        return attribute

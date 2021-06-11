@@ -1,10 +1,10 @@
 from selenium.webdriver.common.by import By
-
 from Config.config import TestData
 from Pages.BasePage import BasePage
 from Pages.HomePage import HomePage
 from Pages.MinhaVisao import MinhaVisao
 from Pages.TokenAPI import TokenAPI
+from Pages.Cadastro import Cadastro
 
 
 class LoginPage(BasePage):
@@ -63,7 +63,12 @@ class LoginPage(BasePage):
         self.do_click(self.BOTAO_TOKEN_API)
         return TokenAPI(self.driver)
 
-
-
-
-
+    def do_login_cadastro(self, username, password):
+        """ Função para realizar login em Menu de Cadastro """
+        self.do_send_keys(self.EMAIL, username)
+        self.do_click(self.LOGIN_BUTTON)
+        self.do_send_keys(self.PASSWORD, password)
+        self.do_click(self.PASSWORD_BUTTON)
+        self.do_click(self.BOTAO_MENU)
+        self.do_click(self.BOTAO_MINHA_CONTA)
+        return Cadastro(self.driver)
