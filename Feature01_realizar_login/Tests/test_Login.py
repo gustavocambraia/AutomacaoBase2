@@ -22,4 +22,9 @@ class Test_Login(BaseTest):
         elemento_resp = myViewPage.get_texto_elemento(LoginPage.MSG_ERRO)
         assert elemento_resp == DadosTest.MSG_ERRO_ESPERADO
 
-    
+    # Teste para login sem usuario
+    def test_login_usuario_vazio(self):
+        self.loginPage = LoginPage(self.driver)
+        myViewPage = self.loginPage.logar()
+        elemento_resp = myViewPage.get_texto_elemento(LoginPage.MSG_ERRO)
+        assert elemento_resp == DadosTest.MSG_ERRO_ESPERADO

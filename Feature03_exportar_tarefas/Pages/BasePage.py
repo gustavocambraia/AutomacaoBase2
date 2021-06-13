@@ -1,3 +1,4 @@
+from attr import s
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -89,22 +90,13 @@ class BasePage():
         document.body.appendChild(input);
         return input;
     """
-    #Metodo envio de arquivo
+
     def enviar_arquivo(self, drop_target, path):
         driver = drop_target.parent
         file_input = driver.execute_script(self.JS_DROP_FILE, drop_target, 0, 0)
         file_input.send_keys(path)
 
-    #Metodo retorno de elemento alert
     def get_alert(self):
         WebDriverWait(self.driver, 10).until(EC.alert_is_present())
         alert = self.driver.switch_to.alert
-        return alert  
-
-    # Metodo retorna msg do required
-    def verificar_required(self, locator):
-        elemento = WebDriverWait(self.driver, 10).until(
-            EC.visibility_of_element_located(locator)
-        )
-        message = self.driver.execute_script('return arguments[0].validationMessage;', elemento)
-        return message
+        return alert     

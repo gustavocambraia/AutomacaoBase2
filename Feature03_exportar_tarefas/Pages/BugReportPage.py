@@ -1,3 +1,4 @@
+from time import sleep
 from Pages.ViewTPage import ViewTPage
 from Pages.BasePage import BasePage
 from selenium.webdriver.common.by import By
@@ -24,7 +25,7 @@ class BugReportPage(BasePage):
         super().__init__(driver)
 
     #Metodo para criação de tarefa apenas com campos obrigatórios
-    def criar_tarefa_obrigatoria(self, resumo='', descricao=''):
+    def criar_tarefa_obrigatoria(self, resumo, descricao):
         self.enviar_teclas(self.RESUMO, resumo)
         self.enviar_teclas(self.DESCRICAO, descricao)
         self.clicar(self.BTN_CRIAR)

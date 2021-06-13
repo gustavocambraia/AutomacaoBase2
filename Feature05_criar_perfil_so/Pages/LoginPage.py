@@ -14,11 +14,9 @@ class LoginPage(BasePage):
         self.driver.get(DadosTest.URL)
 
     #Metodo logar
-    def logar(self, usuario='', senha=''):
+    def logar(self, usuario, senha):
         self.enviar_teclas(self.USUARIO, usuario)
         self.clicar(self.LOGIN_BTN)
-        try:
-            self.enviar_teclas(self.SENHA, senha)
-            self.clicar(self.LOGIN_BTN)
-        finally:
-            return MyViewPage(self.driver)
+        self.enviar_teclas(self.SENHA, senha)
+        self.clicar(self.LOGIN_BTN)
+        return MyViewPage(self.driver)

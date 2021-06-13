@@ -1,3 +1,4 @@
+from attr import s
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -37,6 +38,12 @@ class BasePage():
             EC.visibility_of_element_located(locator)
         )
         return elemento
+
+    def get_elementos(self, locator):
+        elementos = WebDriverWait(self.driver, 10).until(
+            EC.visibility_of_all_elements_located(locator)
+        )
+        return elementos
 
     #Metodo retorna visibilidade do elemento
     def elemento_visivel(self, locator):
@@ -100,7 +107,7 @@ class BasePage():
         WebDriverWait(self.driver, 10).until(EC.alert_is_present())
         alert = self.driver.switch_to.alert
         return alert  
-
+    
     # Metodo retorna msg do required
     def verificar_required(self, locator):
         elemento = WebDriverWait(self.driver, 10).until(
@@ -108,3 +115,4 @@ class BasePage():
         )
         message = self.driver.execute_script('return arguments[0].validationMessage;', elemento)
         return message
+         
