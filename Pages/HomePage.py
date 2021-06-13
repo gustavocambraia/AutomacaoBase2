@@ -38,6 +38,7 @@ class HomePage(BasePage):
         return MinhaVisao(self)
 
     def reverter_senha(self):
+        """ Função para reverter a senha alterada para a original ao final do teste """
         self.do_click(self.BOTAO_MENU)
         self.do_click(self.BOTAO_MINHA_CONTA)
         self.do_click(self.BOTAO_SENHA_ATUAL)

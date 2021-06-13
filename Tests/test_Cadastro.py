@@ -4,7 +4,15 @@ from Tests.test_base import BaseTest
 
 
 class Test_cadastro(BaseTest):
+
     """
+        Nesta classe são realizados os seguintes testes de acordo com o BDD:
+                - Mudar e-mail cadastrado (test_alterar_email);
+                - Mudar o nome real (test_mudar_nome_real);
+                - Alterar a senha (test_alterar_senha);
+                - Alterar a senha sem preencher o campo "Senha Atual" (test_alterar_senha_invalido).
+        """
+
     def test_alterar_senha_invalido(self):
         self.loginPage = LoginPage(self.driver)
         homePage = self.loginPage.do_login_cadastro(TestData.USER_NAME, TestData.PASSWORD)
@@ -12,8 +20,6 @@ class Test_cadastro(BaseTest):
         erro = homePage.verifica_pagina_erro_senha()
         assert TestData.MENSAGEM_ERRO_SENHA == erro
 
-
-    """
     def test_mudar_nome_real(self):
         self.loginPage = LoginPage(self.driver)
         homePage = self.loginPage.do_login_cadastro(TestData.USER_NAME, TestData.PASSWORD)
@@ -21,7 +27,7 @@ class Test_cadastro(BaseTest):
         verifica_nome = homePage.verificar_nome_alterado()
         assert nome_alterado == verifica_nome
         homePage.reverter_nome_real()
-"""
+
     def test_alterar_email(self):
         self.loginPage = LoginPage(self.driver)
         homePage = self.loginPage.do_login_cadastro(TestData.USER_NAME, TestData.PASSWORD)
@@ -38,7 +44,7 @@ class Test_cadastro(BaseTest):
         title = homePage.get_title(TestData.HOME_PAGE_TITLE)
         assert title == TestData.HOME_PAGE_TITLE
         homePage.reverter_senha()
-    """
+
 
 
 

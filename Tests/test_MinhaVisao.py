@@ -1,5 +1,3 @@
-import time
-
 from Config.config import TestData
 from Pages.LoginPage import LoginPage
 from Tests.test_base import BaseTest
@@ -17,7 +15,7 @@ class Test_minhavisao(BaseTest):
             - Pesquisar tarefa com código inválido (test_pesquisa_invalida)
     """
 
-    """
+
     def test_pesquisar_tarefa_valida(self):
         self.loginPage = LoginPage(self.driver)
         homePage = self.loginPage.do_login_tarefas(TestData.USER_NAME, TestData.PASSWORD)
@@ -59,4 +57,3 @@ class Test_minhavisao(BaseTest):
         homePage.do_enter(MinhaVisao.CAMPO_PESQUISAR_TAREFA)
         homePage.verifica_erro_pesquisa()
         assert homePage
-"""

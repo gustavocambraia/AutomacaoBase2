@@ -1,8 +1,6 @@
 import string
-
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
-
 from Pages.BasePage import BasePage
 import random
 

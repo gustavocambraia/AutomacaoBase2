@@ -13,6 +13,7 @@ class TokenAPI(BasePage):
 
 
     def criar_token(self):
+        """ Função para criar um Token API """
         letras = string.ascii_letters
         texto_rand = ''.join(random.choice(letras) for i in range(10))
         self.do_send_keys(self.CAMPO_TEXTO_TOKEN, texto_rand)
@@ -21,6 +22,7 @@ class TokenAPI(BasePage):
         return texto_rand
 
     def deletar_token(self):
+        """ Função para revogar um Token API a partir da tela do TokenAPI """
         self.do_click(self.BOTAO_REVOGAR_TOKEN)
         time.sleep(5)
 
