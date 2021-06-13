@@ -11,39 +11,39 @@ class BasePage():
 
     #Metodo genérico de click
     def clicar(self, locator):
-        WebDriverWait(self.driver, 10).until(
+        WebDriverWait(self.driver, 5).until(
             EC.visibility_of_element_located(locator)
         ).click()
 
     #Metodo genérico envio de texto para o elemento
     def enviar_teclas(self, locator, texto):
-        WebDriverWait(self.driver, 10).until(
+        WebDriverWait(self.driver, 5).until(
             EC.visibility_of_element_located(locator)
         ).send_keys(texto)
     
     #Metodo genérico retornando texto do elemento
     def get_texto_elemento(self, locator):
-        elemento = WebDriverWait(self.driver, 10).until(
+        elemento = WebDriverWait(self.driver, 5).until(
             EC.visibility_of_element_located(locator)
         )
         return elemento.text
 
     #Metodo genérico retornando texto do elemento
     def get_elemento(self, locator):
-        elemento = WebDriverWait(self.driver, 10).until(
+        elemento = WebDriverWait(self.driver, 5).until(
             EC.visibility_of_element_located(locator)
         )
         return elemento
 
     def get_elementos(self, locator):
-        elementos = WebDriverWait(self.driver, 10).until(
+        elementos = WebDriverWait(self.driver, 5).until(
             EC.visibility_of_all_elements_located(locator)
         )
         return elementos
 
     #Metodo retorna visibilidade do elemento
     def elemento_visivel(self, locator):
-        elemento = WebDriverWait(self.driver, 10).until(
+        elemento = WebDriverWait(self.driver, 5).until(
             EC.visibility_of_element_located(locator)
         )
         return bool(elemento)
@@ -55,14 +55,14 @@ class BasePage():
 
     #Metodo retorna atributo style do elemento
     def get_style_elemento(self, locator):
-        elemento = WebDriverWait(self.driver, 10).until(
+        elemento = WebDriverWait(self.driver, 5).until(
             EC.visibility_of_element_located(locator)
         )
         return elemento.get_attribute('style')
 
     #Verificar URL
     def verificar_url(self, urlpart):
-        resp = WebDriverWait(self.driver, 10).until(EC.url_contains(urlpart))
+        resp = WebDriverWait(self.driver, 5).until(EC.url_contains(urlpart))
         return bool(resp)
 
     JS_DROP_FILE = """
@@ -93,11 +93,13 @@ class BasePage():
         return input;
     """
 
+    # Metodo genérico de envio de arquivo
     def enviar_arquivo(self, drop_target, path):
         driver = drop_target.parent
         file_input = driver.execute_script(self.JS_DROP_FILE, drop_target, 0, 0)
         file_input.send_keys(path)
 
+    # Metodo genérico de retorno do elemento alert
     def get_alert(self):
         WebDriverWait(self.driver, 10).until(EC.alert_is_present())
         alert = self.driver.switch_to.alert

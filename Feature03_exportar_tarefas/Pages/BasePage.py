@@ -91,11 +91,13 @@ class BasePage():
         return input;
     """
 
+    # Metodo genérico de envio de arquivo
     def enviar_arquivo(self, drop_target, path):
         driver = drop_target.parent
         file_input = driver.execute_script(self.JS_DROP_FILE, drop_target, 0, 0)
         file_input.send_keys(path)
 
+    # Metodo genérico de retorno de elemento alert
     def get_alert(self):
         WebDriverWait(self.driver, 10).until(EC.alert_is_present())
         alert = self.driver.switch_to.alert

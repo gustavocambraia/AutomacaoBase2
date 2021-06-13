@@ -1,5 +1,5 @@
 from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support import expected_conditions as EC, select
 from Pages.BasePage import BasePage
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select
@@ -36,9 +36,16 @@ class ViewAllPage(BasePage):
     DROPDOWN = (By.CSS_SELECTOR, '#navbar-container > div.navbar-buttons.navbar-header.navbar-collapse.collapse > ul > li.grey > a')
     SAIR = (By.CSS_SELECTOR, '#navbar-container > div.navbar-buttons.navbar-header.navbar-collapse.collapse > ul > li.grey.open > ul > li:nth-child(4) > a')
 
+    DROPDOWN_FILTROS = (By.CSS_SELECTOR, '#filter > div.widget-header.widget-header-small > div:nth-child(2) > div > a')
+    BTN_EDITAR_FILTROS = (By.CSS_SELECTOR, '#filter > div.widget-header.widget-header-small > div:nth-child(2) > div > ul > li:nth-child(3) > a')
+    BTN_DELETAR_FILTRO = (By.CSS_SELECTOR, '#main-container > div.main-content > div.page-content > div > div > div.widget-box.widget-color-blue2 > div.widget-main.no-padding > div > table > tbody > tr:nth-child(1) > td:nth-child(6) > div:nth-child(3) > form > fieldset > button')
+    BTN_CONFIRM_DELETE = (By.CSS_SELECTOR, '#main-container > div.main-content > div.page-content > div > div > div.alert.alert-warning.center > form > input.btn.btn-primary.btn-white.btn-round')
+    ANCORA_VER_TAREFAS = (By.CSS_SELECTOR, '#sidebar > ul > li:nth-child(2) > a')
+
     def __init__(self, driver):
         super().__init__(driver)
 
+    # Metodo de filtragem por parâmetro atribuido
     def filtrar_atribuido(self, valor):
         self.clicar(self.BTN_REDEFINIR)
         self.clicar(self.ANCORA_ATRIBUIDO)
@@ -49,6 +56,7 @@ class ViewAllPage(BasePage):
         del tabelasStatus[0]
         return tabelasStatus
 
+    # Metodo de filtragem por parâmetro estado
     def filtrar_estado(self, valor):
         self.clicar(self.BTN_REDEFINIR)
         self.clicar(self.ANCORA_ESTADO)
@@ -59,6 +67,7 @@ class ViewAllPage(BasePage):
         del tabelasStatus[0]
         return tabelasStatus
 
+    # Metodo de filtragem por parâmetro gravidade
     def filtrar_gravidade(self, valor):
         self.clicar(self.BTN_REDEFINIR)
         self.clicar(self.ANCORA_GRAVIDADE)
@@ -69,6 +78,7 @@ class ViewAllPage(BasePage):
         del tabelasStatus[0]
         return tabelasStatus
 
+    # Metodo de filtragem por parâmetro data de última atualização
     def filtrar_data(self, data_inicio_parseada, data_fim_parseada):
         self.clicar(self.BTN_REDEFINIR)
         self.clicar(self.ANCORA_DATAS)
@@ -90,6 +100,7 @@ class ViewAllPage(BasePage):
         del tabelasStatus[0]
         return tabelasStatus
 
+    # Metodo para criar criar filtro
     def criar_filtro(self, monitor, filtroNome):
         self.clicar(self.BTN_REDEFINIR)
         self.clicar(self.ANCORA_MONITORADO)
@@ -104,7 +115,29 @@ class ViewAllPage(BasePage):
         options = selectFiltros.options
         return options
 
+    # Metodo para deslogar
     def deslogar(self):
         self.clicar(self.DROPDOWN)
         self.clicar(self.SAIR)
         WebDriverWait(self.driver, 10).until(EC.url_matches('https://mantis.saojudas.base2.com.br/login_page.php'))
+
+    # Metodo para deletar filtros
+    def deletar_filtros(self):
+        try:
+            if self.elemento_visivel(self.SELECT_FILTROS_CRIADOS):
+                select = Select(self.get_elemento(self.SELECT_FILTROS_CRIADOS))
+                options = select.options
+                del options[0]
+                for opt in options:
+                    if self.elemento_visivel(self.SELECT_FILTROS_CRIADOS):
+                        self.clicar(self.DROPDOWN_FILTROS)
+                        self.clicar(self.BTN_EDITAR_FILTROS)
+                        WebDriverWait(self.driver, 10).until(EC.url_matches('https://mantis.saojudas.base2.com.br/manage_filter_page.php'))
+                        self.clicar(self.BTN_DELETAR_FILTRO)
+                        self.clicar(self.BTN_CONFIRM_DELETE)
+                        WebDriverWait(self.driver, 10).until(EC.url_matches('https://mantis.saojudas.base2.com.br/manage_filter_page.php'))
+                        self.clicar(self.ANCORA_VER_TAREFAS)
+                        WebDriverWait(self.driver, 10).until(EC.url_matches('https://mantis.saojudas.base2.com.br/view_all_bug_page.php'))
+        finally:
+            return False
+

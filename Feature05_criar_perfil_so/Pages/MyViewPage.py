@@ -14,12 +14,12 @@ class MyViewPage(BasePage):
     def __init__(self, driver):
         super().__init__(driver)
 
-    #Retorna usuario logado
+    # Metodo retorna usuario logado
     def get_usuario_myview(self):
         if self.elemento_visivel(self.USUARIO_MYVIEW):
             return self.get_texto_elemento(self.USUARIO_MYVIEW)
             
-    #Ir para a pagina de conta
+    # Metodo encaminha para pagina de gerenciamento de conta
     def ir_para_pagina_conta(self):
         if self.elemento_visivel(self.DROPDOWN):
             self.clicar(self.DROPDOWN)

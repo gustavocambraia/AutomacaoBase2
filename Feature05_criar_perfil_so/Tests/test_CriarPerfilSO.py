@@ -5,6 +5,7 @@ import pytest
 
 class Test_Filtrar_Tarefas(BaseTest):
 
+    # Teste para criação de perfil
     @pytest.mark.parametrize("plataforma, so, versaoSo, descAdc", DadosTest.LISTA_NOVO_PERFIL)
     @pytest.mark.parametrize("usuario, senha", DadosTest.LISTA_LOGIN)
     def test_criar_perfil(
@@ -21,6 +22,7 @@ class Test_Filtrar_Tarefas(BaseTest):
             if p.text == perfil:
                 assert perfil == p.text
 
+    # Teste de criação de teste sem preenchimento de campos obrigatórios
     @pytest.mark.parametrize("plataforma, so, versaoSo, descAdc", DadosTest.LISTA_NOVO_PERFIL_INVALIDO)
     @pytest.mark.parametrize("usuario, senha", DadosTest.LISTA_LOGIN)
     def test_criar_perfil_sem_obg(
@@ -38,6 +40,7 @@ class Test_Filtrar_Tarefas(BaseTest):
         msg = accountPage.verificar_required(accountPage.VERSAO_SO)
         assert msg in 'Preencha este campo.'
 
+    # Teste de edição de perfil de SO
     @pytest.mark.parametrize("plataforma, so, versaoSo, descAdc, novaPlataforma", DadosTest.LISTA_EDITAR_PERFIL)
     @pytest.mark.parametrize("usuario, senha", DadosTest.LISTA_LOGIN)
     def test_editar_perfil(

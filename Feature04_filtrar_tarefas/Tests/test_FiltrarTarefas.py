@@ -8,6 +8,7 @@ from time import sleep
 
 class Test_Filtrar_Tarefas(BaseTest):
 
+    # Teste filtrar tarefa pelo parâmetro atribuido
     @pytest.mark.parametrize("atribuido", DadosTest.LISTA_ATRIBUIDO)
     @pytest.mark.parametrize("usuario, senha", DadosTest.LISTA_LOGIN)
     def test_filtrar_tarefa_atribuido(self, usuario, senha, atribuido):
@@ -22,6 +23,7 @@ class Test_Filtrar_Tarefas(BaseTest):
         viewAllPage.deslogar()
         assert viewAllPage.driver.current_url == DadosTest.URL
 
+    # Teste filtrar tarefa pelo parâmetro gravidade
     @pytest.mark.parametrize("gravidade", DadosTest.LISTA_GRAVIDADE)
     @pytest.mark.parametrize("usuario, senha", DadosTest.LISTA_LOGIN)
     def test_filtrar_tarefa_gravidade(self, usuario, senha, gravidade):
@@ -36,6 +38,7 @@ class Test_Filtrar_Tarefas(BaseTest):
         viewAllPage.deslogar()
         assert viewAllPage.driver.current_url == DadosTest.URL
 
+    # Teste filtrar tarefa pelo parâmetro estado
     @pytest.mark.parametrize("estado", DadosTest.LISTA_ESTADO)
     @pytest.mark.parametrize("usuario, senha", DadosTest.LISTA_LOGIN)
     def test_filtrar_tarefa_estado(self, usuario, senha, estado):
@@ -50,6 +53,7 @@ class Test_Filtrar_Tarefas(BaseTest):
         viewAllPage.deslogar()
         assert viewAllPage.driver.current_url == DadosTest.URL
 
+    # Teste filtrar tarefa pelo parâmetro data de última atualização
     @pytest.mark.parametrize("data_inicio, data_fim", DadosTest.LISTA_DATAS)
     @pytest.mark.parametrize("usuario, senha", DadosTest.LISTA_LOGIN)
     def test_filtrar_tarefa_estado(self, usuario, senha, data_inicio, data_fim):
@@ -71,12 +75,14 @@ class Test_Filtrar_Tarefas(BaseTest):
         viewAllPage.deslogar()
         assert viewAllPage.driver.current_url == DadosTest.URL
 
+    # Teste criar filtros
     @pytest.mark.parametrize("monitor, filtroNome", DadosTest.LISTA_SAVE_FILTER)
     @pytest.mark.parametrize("usuario, senha", DadosTest.LISTA_LOGIN)
     def test_criar_filtro(self, usuario, senha, monitor, filtroNome):
         self.loginPage = LoginPage(self.driver)
         myViewPage = self.loginPage.logar(usuario, senha)
         viewAllPage = myViewPage.ir_para_ver_tarefas()
+        viewAllPage.deletar_filtros()
         opcoes = viewAllPage.criar_filtro(monitor, filtroNome)
         for opc in opcoes:
             if opc == filtroNome:

@@ -7,6 +7,7 @@ class MyViewPage(BasePage):
     def __init__(self, driver):
         super().__init__(driver)
 
+    # Metodo retorna usuario logado
     def get_usuario_myview(self):
         if self.elemento_visivel(self.USUARIO_MYVIEW):
             return self.get_texto_elemento(self.USUARIO_MYVIEW)

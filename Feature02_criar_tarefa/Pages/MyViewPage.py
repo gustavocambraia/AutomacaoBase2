@@ -9,12 +9,12 @@ class MyViewPage(BasePage):
     def __init__(self, driver):
         super().__init__(driver)
 
-    #Retorna usuario logado
+    # Metodo retorna usuario logado
     def get_usuario_myview(self):
         if self.elemento_visivel(self.USUARIO_MYVIEW):
             return self.get_texto_elemento(self.USUARIO_MYVIEW)
 
-    #Encaminha para criar tarefa
+    # Metodo encaminha para criar tarefa
     def ir_para_criar_tarefa(self):
         if self.elemento_visivel(self.CRIAR_TAREFA):
             self.clicar(self.CRIAR_TAREFA)

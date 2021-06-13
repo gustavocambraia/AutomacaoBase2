@@ -24,10 +24,12 @@ class AccountPage(BasePage):
     def __init__(self, driver):
         super().__init__(driver)
 
+    # Metodo para pegar expecifico da tela de criação de perfil SO
     def pegar_select(self):
         select = Select(self.get_elemento(self.SELECT_PERFILS))
         return select
 
+    # Metodo de criação de perfil
     def criar_perfil(self, plataforma, so, versaoSo, descAdc):
         self.clicar(self.ABA_PERFIS)
         WebDriverWait(self.driver, 10).until(EC.url_matches('https://mantis.saojudas.base2.com.br/account_prof_menu_page.php'))
@@ -40,6 +42,7 @@ class AccountPage(BasePage):
         select = self.pegar_select()
         return select
 
+    # Metodo de edição de filtro
     def editar_filtro(self, perfil):
         select = self.pegar_select()
         select.select_by_visible_text(perfil)

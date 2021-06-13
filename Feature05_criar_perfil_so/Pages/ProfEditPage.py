@@ -10,6 +10,7 @@ class ProfEditPage(BasePage):
     def __init__(self, driver):
         super().__init__(driver)
 
+    # Metodo de edição de plataforma do perfil
     def editar_plataforma(self, novaPlataforma):
         input = self.get_elemento(self.PLATAFORMA)
         input.clear()

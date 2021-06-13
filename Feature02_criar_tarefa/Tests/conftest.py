@@ -3,7 +3,7 @@ from selenium import webdriver
 from Config.config import DadosTest
 
 #Iniciar webdriver
-@pytest.fixture(params=["firefox"], scope='class')
+@pytest.fixture(params=["chrome", "firefox"], scope='class')
 def iniciar_driver(request):
     if request.param == "chrome":
         web_driver = webdriver.Chrome(executable_path=DadosTest.CHROMEDRIVER_PATH)
