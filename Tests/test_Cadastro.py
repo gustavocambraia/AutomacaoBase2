@@ -11,7 +11,7 @@ class Test_cadastro(BaseTest):
                 - Mudar o nome real (test_mudar_nome_real);
                 - Alterar a senha (test_alterar_senha);
                 - Alterar a senha sem preencher o campo "Senha Atual" (test_alterar_senha_invalido).
-        """
+    """
 
     def test_alterar_senha_invalido(self):
         self.loginPage = LoginPage(self.driver)
