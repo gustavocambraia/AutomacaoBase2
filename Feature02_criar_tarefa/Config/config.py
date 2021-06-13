@@ -27,7 +27,7 @@ class DadosTest:
             lista.append(tupla)
         return lista
 
-    LISTA_LOGIN = alimentar_list(PATH ,"Login")
+    LISTA_LOGIN = alimentar_list(PATH, "Login")
     LISTA_OBRIGATORIO = alimentar_list(PATH, "Obrigatorios")
     LISTA_ARQUIVO_VALID = alimentar_list(PATH, "ArquivoValido")
     LISTA_ARQUIVO_INVALID = alimentar_list(PATH, "ArquivoInvalido")

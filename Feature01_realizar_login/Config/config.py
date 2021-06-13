@@ -27,8 +27,8 @@ class DadosTest:
             lista.append(tupla)
         return lista
 
-    LISTA_VALIDOS = alimentar_list(PATH ,"LoginsValidos")
-    LISTA_INVALIDOS = alimentar_list(PATH ,"LoginsInvalidos")
+    LISTA_VALIDOS = alimentar_list(PATH, "LoginsValidos")
+    LISTA_INVALIDOS = alimentar_list(PATH, "LoginsInvalidos")
 
     MSG_ERRO_ESPERADO = "Sua conta pode estar desativada ou bloqueada ou o nome de usuário e a senha que você digitou não estão corretos."
 
