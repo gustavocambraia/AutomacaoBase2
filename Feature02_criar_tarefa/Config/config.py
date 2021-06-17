@@ -2,11 +2,11 @@ import ExcelUtils
 
 class DadosTest:
     #Web Drivers pastas
-    CHROMEDRIVER_PATH = "/tools/selenium/chromedriver"
-    GECKODRIVER_PATH = "/tools/selenium/geckodriver"
+    CHROMEDRIVER_PATH = r"C:\Program Files\JetBrains\PyCharm Community Edition 2020.1.2\bin\chromedriver.exe"
+    GECKODRIVER_PATH = r"C:\ProgramData\Microsoft\Windows\Start Menu\Programs\geckodriver"
 
     #Data Driven Excel pasta
-    PATH = "/Users/Lorenzo/Documents/Aulas Faculdade/ProjetoUC/Feature02_criar_tarefa/CriarTarefa.xlsx"
+    PATH = r"C:\Users\gusta\Desktop\AutomacaoBase2-master\AutomacaoBase2-master\Feature02_criar_tarefaFeature02_criar_tarefa\CriarTarefa.xlsx"
 
     #URL da pagina de login
     URL = "https://mantis.saojudas.base2.com.br/login_page.php"
@@ -27,7 +27,7 @@ class DadosTest:
             lista.append(tupla)
         return lista
 
-    LISTA_LOGIN = alimentar_list(PATH ,"Login")
+    LISTA_LOGIN = alimentar_list(PATH, "Login")
     LISTA_OBRIGATORIO = alimentar_list(PATH, "Obrigatorios")
     LISTA_ARQUIVO_VALID = alimentar_list(PATH, "ArquivoValido")
     LISTA_ARQUIVO_INVALID = alimentar_list(PATH, "ArquivoInvalido")

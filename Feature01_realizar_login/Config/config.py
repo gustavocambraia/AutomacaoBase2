@@ -2,11 +2,11 @@ import ExcelUtils
 
 class DadosTest:
     #Web Drivers pastas
-    CHROMEDRIVER_PATH = "/tools/selenium/chromedriver"
-    GECKODRIVER_PATH = "/tools/selenium/geckodriver"
+    CHROMEDRIVER_PATH = r"C:\Program Files\JetBrains\PyCharm Community Edition 2020.1.2\bin\chromedriver.exe"
+    GECKODRIVER_PATH = r"C:\ProgramData\Microsoft\Windows\Start Menu\Programs\geckodriver"
 
     #Data Driven Excel pasta
-    PATH = "/Users/Lorenzo/Documents/Aulas Faculdade/ProjetoUC/Feature01_realizar_login/Login1.xlsx"
+    PATH = r"C:\Users\gusta\Desktop\AutomacaoBase2-master\AutomacaoBase2-master\Feature01_realizar_login\Login1.xlsx"
 
     #URL da pagina de login
     URL = "https://mantis.saojudas.base2.com.br/login_page.php"
@@ -27,8 +27,8 @@ class DadosTest:
             lista.append(tupla)
         return lista
 
-    LISTA_VALIDOS = alimentar_list(PATH ,"LoginsValidos")
-    LISTA_INVALIDOS = alimentar_list(PATH ,"LoginsInvalidos")
+    LISTA_VALIDOS = alimentar_list(PATH, "LoginsValidos")
+    LISTA_INVALIDOS = alimentar_list(PATH, "LoginsInvalidos")
 
     MSG_ERRO_ESPERADO = "Sua conta pode estar desativada ou bloqueada ou o nome de usuário e a senha que você digitou não estão corretos."
 

@@ -2,11 +2,11 @@ import ExcelUtils
 
 class DadosTest:
     #Web Drivers pastas
-    CHROMEDRIVER_PATH = "/tools/selenium/chromedriver"
-    GECKODRIVER_PATH = "/tools/selenium/geckodriver"
+    CHROMEDRIVER_PATH = r"C:\Program Files\JetBrains\PyCharm Community Edition 2020.1.2\bin\chromedriver.exe"
+    GECKODRIVER_PATH = r"C:\ProgramData\Microsoft\Windows\Start Menu\Programs\geckodriver"
 
     #Data Driven Excel pasta
-    PATH = r"C:\Users\Lorenzo\Documents\Aulas Faculdade\ProjetoUC\Feature04_filtrar_tarefas\FiltrarTarefas.xlsx"
+    PATH = r"C:\Users\gusta\Desktop\AutomacaoBase2-master\AutomacaoBase2-master\Feature04_filtrar_tarefas\FiltrarTarefas.xlsx"
 
     #URL da pagina de login
     URL = "https://mantis.saojudas.base2.com.br/login_page.php"
@@ -32,7 +32,7 @@ class DadosTest:
                     lista.append(dado)
         return lista
 
-    LISTA_LOGIN = alimentar_list(PATH ,"Login")
+    LISTA_LOGIN = alimentar_list(PATH, "Login")
     LISTA_ATRIBUIDO = alimentar_list(PATH, "FiltrarAtribuido")
     LISTA_GRAVIDADE = alimentar_list(PATH, "FiltrarGravidade")
     LISTA_ESTADO = alimentar_list(PATH, "FiltrarEstado")
