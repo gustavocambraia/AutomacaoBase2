@@ -48,7 +48,7 @@ class Test_Criar_Tarefa(BaseTest):
         bugReportPage.criar_tarefa_obrigatoria()
         msg = bugReportPage.verificar_required(bugReportPage.RESUMO)
         assert msg in 'Preencha este campo.'
-        msg = bugReportPage.verificar_required(bugReportPage.DESC)
+        msg = bugReportPage.verificar_required(bugReportPage.DESCRICAO)
         assert msg in 'Preencha este campo.'
 
     # Anexar arquivo válido

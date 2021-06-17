@@ -53,7 +53,7 @@ class BasePage():
     #Metodo retorna atributo style do elemento
     def get_style_elemento(self, locator):
         elemento = WebDriverWait(self.driver, 10).until(
-            EC.visibility_of_element_located(locator)
+            EC.presence_of_element_located(locator)
         )
         return elemento.get_attribute('style')
 

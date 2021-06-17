@@ -6,7 +6,8 @@ import os.path
 
 class BugReportPage(BasePage):
 
-    BTN_PERFIL = (By.CSS_SELECTOR, '#profile_closed_link > i')
+    BTN_PERFIL_CLOSED = (By.CSS_SELECTOR, '#profile_closed_link > i')
+    DIV_OPEN = (By.CSS_SELECTOR, '#profile_open')
     PLATAFORMA = (By.XPATH, '//*[@id="profile_open"]/table/tbody/tr[1]/td/span/input[2]')
     SO = (By.NAME, 'os')
     VERSAO_SO = (By.NAME, 'os_build')
@@ -42,8 +43,10 @@ class BugReportPage(BasePage):
         self.enviar_teclas(self.INFO_ADC, infoAdc)
         self.enviar_teclas(self.TAG, tag)
         try:
-            if self.elemento_displayed(self.BTN_PERFIL):
-                self.clicar(self.BTN_PERFIL)
+            if 'none' in self.get_style_elemento(self.DIV_OPEN):
+                if self.elemento_visivel(self.BTN_PERFIL_CLOSED):
+                    elemento = self.get_elemento(self.BTN_PERFIL_CLOSED)
+                    self.driver.execute_script("arguments[0].click();", elemento)
         finally:
             self.enviar_teclas(self.PLATAFORMA, plataforma)
             self.enviar_teclas(self.SO, so)
